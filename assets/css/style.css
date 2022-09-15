@@ -61,6 +61,7 @@ header h2 {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    transition: all 0.1s ease;
 }
 
 .control {
