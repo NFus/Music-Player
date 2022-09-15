@@ -24,6 +24,7 @@ const app = {
     currentIndex: 0,
     isRandom: false,
     isRepeat: false,
+    loveSong: Array(1000).fill(false),
 
     config: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {},
 
@@ -94,8 +95,6 @@ const app = {
             image: "./assets/img/Nandemonaiya - Kamishiraishi Mone.jpg",
         },
     ],
-
-    loveSong: Array(1000).fill(false),
 
     render: function () {
         var html = this.songs.map(
