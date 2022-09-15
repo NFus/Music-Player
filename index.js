@@ -18,13 +18,14 @@ const dashboard = $(".dashboard");
 const playlist = $(".play-list");
 
 const LOCAL_STORAGE_KEY = "Media-Config";
+// localStorage.clear();
 
 const app = {
     isPlaying: false,
     currentIndex: 0,
     isRandom: false,
     isRepeat: false,
-    loveSong: Array(1000).fill(false),
+    loveSong: [],
 
     config: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {},
 
@@ -125,12 +126,14 @@ const app = {
     },
 
     loadConfig: function () {
-        this.isRandom = this.config.isRandom;
-        this.isRepeat = this.config.isRepeat;
-        this.loveSong = this.config.loveSong;
+        this.loveSong = Array(this.songs.length).fill(false);
 
-        randomBtn.classList.toggle("active", _this.isRandom);
-        repeatBtn.classList.toggle("active", _this.isRepeat);
+        this.isRandom = this.config.isRandom || this.isRandom;
+        this.isRepeat = this.config.isRepeat || this.isRepeat;
+        this.loveSong = this.config.loveSong || this.loveSong;
+
+        randomBtn.classList.toggle("active", this.isRandom);
+        repeatBtn.classList.toggle("active", this.isRepeat);
     },
 
     loadCurrentSong: function () {
@@ -346,8 +349,8 @@ const app = {
         this.defineProperties();
         this.loadCurrentSong();
         this.handleEvents();
-        this.loadConfig();
 
+        this.loadConfig();
         this.render();
     },
 };
